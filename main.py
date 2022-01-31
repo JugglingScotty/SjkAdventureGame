@@ -1,3 +1,23 @@
+class Room:
+    #a class that represents one room in the dungeon.
+    def __init__(self,x,y):
+        #setting the corners of the room, with x and y coordinates
+        #determining the values of the corners of the rooms.
+        #a random thing in the center of the room.
+    pass
+
+class Player:
+    #representing the player character during the game.
+    #the number of steps moved so far.
+
+class Map:
+    #representing a collection of rooms.
+    def __init__(self):
+        #initialize a list of rooms.
+
+    def addRoom(self,room):
+        #check if the room shares a wall .
+        #add the room to the end of the list.
 '''
 
 This is a basic version of the Adventure game. It is completely text-based.

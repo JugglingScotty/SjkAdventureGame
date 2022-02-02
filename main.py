@@ -8,7 +8,9 @@ class Room:
         self.vertical = vertical
         #determining the values of the corners of the rooms.
         #a random thing in the center of the room.
-    pass
+
+    def contents(self):
+        pass
 
 class Player:
     #representing the player character during the game.

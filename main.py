@@ -1,7 +1,11 @@
 class Room:
     #a class that represents one room in the dungeon.
-    def __init__(self,x,y):
-        #setting the corners of the room, with x and y coordinates
+
+
+
+    def __init__(self,horizontal,vertical):
+        self.horizontal = horizontal
+        self.vertical = vertical
         #determining the values of the corners of the rooms.
         #a random thing in the center of the room.
     pass
@@ -31,7 +35,12 @@ track how far a user has walked or moved in the game.
 
 '''
 
-# todo Create room class.
+coordinate_x = 0
+coordinate_y = 0
+
+#create a room
+newroom = Room(coordinate_x,coordinate_y)
+
 # todo Room instances should have values for the walls for N, S, E, W.
 # todo The value for a wall should be either a blank wall or a passage.
 # todo the room should contain something of note.

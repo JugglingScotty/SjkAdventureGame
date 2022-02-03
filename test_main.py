@@ -7,4 +7,4 @@ class TestRoom(TestCase):
 
 class TestRoom(TestCase):
     def test_contents(self):
-        self.fail()
+        self.assertTrue()

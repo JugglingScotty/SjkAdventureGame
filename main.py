@@ -1,16 +1,19 @@
 class Room:
     #a class that represents one room in the dungeon.
+    #todo add items to the dictionary for room descriptions.
+    dict_contents = {test:"Contents",1:"First Description"}
 
 
 
     def __init__(self,horizontal,vertical):
         self.horizontal = horizontal
         self.vertical = vertical
+        self.contents = dict_contents{1}
         #determining the values of the corners of the rooms.
         #a random thing in the center of the room.
 
-    def contents(self):
-        pass
+    def whats_in_room(self):
+        return self.contents
 
 class Player:
     #representing the player character during the game.

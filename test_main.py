@@ -5,9 +5,9 @@ import main
 
 class TestRoom(unittest.TestCase):
     def test_contents(self):
-        test_room = main.Room(1, 1)
+        test_room = main.Room(1, 1, "Test contents.")
         contents = test_room.whats_in_room()
-        self.assertEqual(contents, "A skull with flaming eyes.")
+        self.assertEqual(contents, "Test contents.")
 
 
 if __name__ == '__main__':

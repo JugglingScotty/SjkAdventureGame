@@ -4,15 +4,17 @@ import random
 class Room:
     # a class that represents one room in the dungeon.
     # todo add items to the dictionary for room descriptions.
-    dict_contents = {"test": "Contents", 1: "A skull with flaming eyes."}
+    dict_contents = {0: "A block made of ice", 1: "A skull with flaming eyes."}
 
-    def __init__(self, horizontal, vertical):
+    def __init__(self, horizontal, vertical, contents_str=None):
         self.horizontal = horizontal
         self.vertical = vertical
 
         # todo have this driven by the length of the dictionary
-        contents_random_int = random.randint(1, 1)
+        contents_random_int = random.randint(0, len(Room.dict_contents))
         self.contents = Room.dict_contents[contents_random_int]
+        if type(contents_str) is not None:
+            self.contents = contents_str
 
         # determining the values of the sides of the rooms.
 

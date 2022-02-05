@@ -10,8 +10,10 @@ class Room:
         self.horizontal = horizontal
         self.vertical = vertical
 
-        contents_random_int = random.randint(0, len(Room.dict_contents))
-        self.contents = Room.dict_contents[contents_random_int]
+        # todo create a file so the values of the contents dictionary can have many values.
+
+        self.contents = random.choice(list(Room.dict_contents))
+
         if type(contents_str) is not None:
             self.contents = contents_str
 

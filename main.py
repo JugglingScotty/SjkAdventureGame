@@ -10,7 +10,6 @@ class Room:
         self.horizontal = horizontal
         self.vertical = vertical
 
-        # todo have this driven by the length of the dictionary
         contents_random_int = random.randint(0, len(Room.dict_contents))
         self.contents = Room.dict_contents[contents_random_int]
         if type(contents_str) is not None:

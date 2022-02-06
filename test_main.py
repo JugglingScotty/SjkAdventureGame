@@ -5,7 +5,7 @@ import main
 
 class TestRoom(unittest.TestCase):
     def test_contents(self):
-        test_room = main.Room(1, 1, "Test contents.")
+        test_room = main.Room("Test contents.")
         contents = test_room.whats_in_room()
         self.assertEqual(contents, "Test contents.")
 

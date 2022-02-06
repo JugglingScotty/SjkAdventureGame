@@ -6,9 +6,7 @@ class Room:
     # todo add items to the dictionary for room descriptions.
     dict_contents = {0: "A block made of ice", 1: "A skull with flaming eyes."}
 
-    def __init__(self, horizontal, vertical, contents_str=None):
-        self.horizontal = horizontal
-        self.vertical = vertical
+    def __init__(self, contents_str=None):
 
         # todo create a file so the values of the contents dictionary can have many values.
 
@@ -24,8 +22,7 @@ class Room:
 
 
 class Player:
-    # representing the player character during the game.
-    # the number of steps moved so far.
+    # contains the number of steps moved so far.
 
     def __init__(self):
         self.steps = 0
@@ -65,7 +62,7 @@ coordinate_x = 0
 coordinate_y = 0
 
 # create a room
-new_room = Room(coordinate_x, coordinate_y)
+# new_room = Room(coordinate_x, coordinate_y)
 
 # todo Room instances should have values for the walls for N, S, E, W.
 # todo The value for a wall should be either a blank wall or a passage.

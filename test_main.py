@@ -10,5 +10,12 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(contents, "Test contents.")
 
 
+class TestPlayer(unittest.TestCase):
+    def test_take_step(self):
+        test_player = main.Player()
+        test_player.take_step()
+        self.assertEqual(test_player.num_steps(), 1)
+
+
 if __name__ == '__main__':
     unittest.main()

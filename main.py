@@ -26,8 +26,15 @@ class Room:
 class Player:
     # representing the player character during the game.
     # the number of steps moved so far.
-    pass
 
+    def __init__(self):
+        self.steps = 0
+
+    def take_step(self):
+        self.steps += 1
+
+    def num_steps(self):
+        return self.steps
 
 class Map:
     # representing a collection of rooms.

@@ -28,6 +28,10 @@ class Room:
     def whats_on_walls(self, wall):
         return self.dict_room_walls[wall]
 
+    def move_that_direction(self, direction):
+        # Make sure that the direction chosen has an exit.
+        pass
+
 
 class Player:
     # contains the number of steps moved so far.
@@ -41,17 +45,21 @@ class Player:
     def num_steps(self):
         return self.steps
 
+    def move(self, direction):
+        # Call Move that direction from the room.
+
 
 class Map:
     # representing a collection of rooms.
     def __init__(self):
         # initialize a list of rooms.
-        pass
+        self.instance_map = [[]]
 
-    def add_room(self, room):
-        # check if the room shares a wall .
-        # add the room to the end of the list.
-        pass
+    def add_room(self, direction):
+        # todo check if the room is new, and create a new room
+
+
+        self.instance_map[]
 
 
 '''
@@ -68,6 +76,11 @@ track how far a user has walked or moved in the game.
 '''
 
 if __name__ == '__main__':
+
+    # Create map
+    # Create first room
+    # Solicit input the direction of travel.
+    # Pass the direction of travel to ____, who moves in that direction.
 
     coordinate_x = 0
     coordinate_y = 0

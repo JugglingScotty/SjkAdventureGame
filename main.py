@@ -46,18 +46,29 @@ class Player:
         return self.steps
 
     def move(self, direction):
+        # Determine what room the player is in on the map
         # Call Move that direction from the room.
+        # Call add_room from the map
 
 
 class Map:
     # representing a collection of rooms.
+
+    dict_directions = {}
+
     def __init__(self):
         # initialize a list of rooms.
         self.instance_map = [[]]
 
-    def add_room(self, direction):
-        # todo check if the room is new, and create a new room
+    def current_room(self):
+        return
 
+    def move_room(self, direction):
+
+
+        #if the room is new, add a room
+
+    def add_room(self, direction):
 
         self.instance_map[]
 

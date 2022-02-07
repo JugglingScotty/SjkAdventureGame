@@ -9,16 +9,24 @@ class Room:
     def __init__(self, contents_str=None):
 
         # todo create a file so the values of the contents dictionary can have many values.
+        # todo call an OpenAI API so it can fill in the description of the room's contents.
 
         self.contents = random.choice(list(Room.dict_contents))
 
         if type(contents_str) is not None:
             self.contents = contents_str
 
+        # the wall's contents.
+
+        self.dict_room_walls = {"North": "Blank", "South": "Blank", "East": "Blank", "West": "Blank"}
+
         # determining the values of the sides of the rooms.
 
     def whats_in_room(self):
         return self.contents
+
+    def whats_on_walls(self, wall):
+        return self.dict_room_walls[wall]
 
 
 class Player:
@@ -32,6 +40,7 @@ class Player:
 
     def num_steps(self):
         return self.steps
+
 
 class Map:
     # representing a collection of rooms.
@@ -58,11 +67,13 @@ track how far a user has walked or moved in the game.
 
 '''
 
-coordinate_x = 0
-coordinate_y = 0
+if __name__ == '__main__':
 
-# create a room
-# new_room = Room(coordinate_x, coordinate_y)
+    coordinate_x = 0
+    coordinate_y = 0
+
+    # create a room
+    # new_room = Room(coordinate_x, coordinate_y)
 
 # todo Room instances should have values for the walls for N, S, E, W.
 # todo The value for a wall should be either a blank wall or a passage.

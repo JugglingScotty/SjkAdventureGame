@@ -69,7 +69,8 @@ class Map:
 
     def add_room(self, direction):
 
-        self.instance_map[]
+        # self.instance_map[]
+        pass
 
 
 '''

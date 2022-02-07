@@ -30,6 +30,7 @@ class Room:
 
     def move_that_direction(self, direction):
         # Make sure that the direction chosen has an exit.
+
         pass
 
 
@@ -49,24 +50,22 @@ class Player:
         # Determine what room the player is in on the map
         # Call Move that direction from the room.
         # Call add_room from the map
+        self.take_step()
 
 
 class Map:
     # representing a collection of rooms.
 
-    dict_directions = {}
+    dict_directions = {"North":1, "South":-1, "East":1, "West": -1}
 
     def __init__(self):
         # initialize a list of rooms.
         self.instance_map = [[]]
 
     def current_room(self):
-        return
-
-    def move_room(self, direction):
-
-
-        #if the room is new, add a room
+        x_coordinate = 1
+        y_coordinate = 1
+        return [x_coordinate,y_coordinate]
 
     def add_room(self, direction):
 

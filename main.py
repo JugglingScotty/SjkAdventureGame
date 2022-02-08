@@ -68,18 +68,23 @@ class Map:
         self.instance_map.append(Room())
 
     def move_room(self, direction):
+        # create the new coordinate
         if direction == "East" or direction == "West":
             self.x_coordinate = self.x_coordinate + Map.dict_directions[direction]
         if direction == "North" or direction == "South":
             self.y_coordinate = self.y_coordinate + Map.dict_directions[direction]
 
+        self.add_room()
+
     def current_room(self):
         return [self.x_coordinate, self.y_coordinate]
 
-    def add_room(self, direction):
+    def add_room(self):
 
-        # self.instance_map[]
-        pass
+        if isinstance(self.instance_map[self.x_coordinate], Room):
+            return None
+
+        self.instance_map[self.x_coordinate] = Room()
 
 
 '''
@@ -97,10 +102,10 @@ track how far a user has walked or moved in the game.
 
 if __name__ == '__main__':
 
+    # Creates both the map and the first room.
     player_map = Map()
-    # Create first room
     # Solicit input the direction of travel.
-    # Pass the direction of travel to ____, who moves in that direction.
+    # Pass the direction of travel to the Person, who moves in that direction.
 
     # create a room
     # new_room = Room(coordinate_x, coordinate_y)

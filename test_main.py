@@ -15,6 +15,15 @@ class TestRoom(unittest.TestCase):
         contents = test_room.whats_on_walls("North")
         self.assertEqual(contents, "Blank")
 
+    # def test_add_room_no_room(self):
+    #     test_room = main.Room()
+    #     self.assertIsInstance(test_room, main.Room)
+    #     isinstance(self.instance_map[self.x_coordinate], Room)
+    #
+    # def test_add_room_room_present(self):
+    #     pass
+
+
 class TestPlayer(unittest.TestCase):
     def test_take_step(self):
         test_player = main.Player()

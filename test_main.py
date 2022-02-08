@@ -21,6 +21,10 @@ class TestPlayer(unittest.TestCase):
         test_player.take_step()
         self.assertEqual(test_player.num_steps(), 1)
 
+class TestMap(unittest.TestCase):
+    def test_map_creation(self):
+        test_map = main.Map()
+        self.assertIsInstance(test_map.instance_map[0], main.Room)
 
 if __name__ == '__main__':
     unittest.main()

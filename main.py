@@ -46,26 +46,35 @@ class Player:
     def num_steps(self):
         return self.steps
 
-    def move(self, direction):
-        # Determine what room the player is in on the map
+    def move_person(self, p_map, direction):
         # Call Move that direction from the room.
+        p_map.move_room(direction)
         # Call add_room from the map
+
+        # Increment the number of steps upward.
         self.take_step()
 
 
 class Map:
     # representing a collection of rooms.
 
-    dict_directions = {"North":1, "South":-1, "East":1, "West": -1}
+    dict_directions = {"North": 1, "South": -1, "East": 1, "West": -1}
 
     def __init__(self):
         # initialize a list of rooms.
-        self.instance_map = [[]]
+        self.instance_map = []
+        self.x_coordinate = 0
+        self.y_coordinate = 0
+        self.instance_map.append(Room())
+
+    def move_room(self, direction):
+        if direction == "East" or direction == "West":
+            self.x_coordinate = self.x_coordinate + Map.dict_directions[direction]
+        if direction == "North" or direction == "South":
+            self.y_coordinate = self.y_coordinate + Map.dict_directions[direction]
 
     def current_room(self):
-        x_coordinate = 1
-        y_coordinate = 1
-        return [x_coordinate,y_coordinate]
+        return [self.x_coordinate, self.y_coordinate]
 
     def add_room(self, direction):
 
@@ -88,13 +97,10 @@ track how far a user has walked or moved in the game.
 
 if __name__ == '__main__':
 
-    # Create map
+    player_map = Map()
     # Create first room
     # Solicit input the direction of travel.
     # Pass the direction of travel to ____, who moves in that direction.
-
-    coordinate_x = 0
-    coordinate_y = 0
 
     # create a room
     # new_room = Room(coordinate_x, coordinate_y)

@@ -15,13 +15,11 @@ class TestRoom(unittest.TestCase):
         contents = test_room.whats_on_walls("North")
         self.assertEqual(contents, "Blank")
 
-    # def test_add_room_no_room(self):
-    #     test_room = main.Room()
-    #     self.assertIsInstance(test_room, main.Room)
-    #     isinstance(self.instance_map[self.x_coordinate], Room)
-    #
-    # def test_add_room_room_present(self):
-    #     pass
+    def test_add_room_no_room(self):
+        pass
+
+    def test_add_room_room_present(self):
+        pass
 
 
 class TestPlayer(unittest.TestCase):
@@ -30,10 +28,12 @@ class TestPlayer(unittest.TestCase):
         test_player.take_step()
         self.assertEqual(test_player.num_steps(), 1)
 
+
 class TestMap(unittest.TestCase):
     def test_map_creation(self):
         test_map = main.Map()
         self.assertIsInstance(test_map.instance_map[0], main.Room)
+
 
 if __name__ == '__main__':
     unittest.main()

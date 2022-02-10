@@ -102,17 +102,24 @@ track how far a user has walked or moved in the game.
 
 if __name__ == '__main__':
 
-    entered_commands = ["Contents", "Walls", "North", "South", "East", "West"]
+    entered_commands = ["contents", "walls", "north", "south", "east", "west", "exit"]
     # Creates both the map and the first room.
     player_map = Map()
+    player = Player()
 
-    input("Please enter a command (For list of commands, enter command): ")
+    player_entry = input("Please enter a command (For list of commands, enter command): ").lower()
 
-    while input not in entered_commands:
+    while player_entry not in entered_commands:
         print("That is not a valid command.")
-        input("Please enter a command (For list of commands, enter command): ")
+        player_entry = input("Please enter a command (For list of commands, enter command): ")
 
-    # Solicit input the direction of travel.
+    # if the player exits, then the whole thing is over.
+    if player_entry == "exit"
+        break
+
+    if player_entry in entered_commands[2, 5]
+        player.take_step()
+
     # Pass the direction of travel to the Person, who moves in that direction.
 
     # create a room

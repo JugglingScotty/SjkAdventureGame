@@ -48,9 +48,7 @@ class Player:
 
     def move_person(self, p_map, direction):
         # Call Move that direction from the room.
-        p_map.move_room(direction)
-        # Call add_room from the map
-
+        p_map.move_room(direction.lower())
         # Increment the number of steps upward.
         self.take_step()
 
@@ -58,42 +56,46 @@ class Player:
 class Map:
     # representing a collection of rooms.
 
-    dict_directions = {"North": 1, "South": -1, "East": 1, "West": -1}
+    dict_directions = {"north": 1, "south": -1, "east": 1, "west": -1}
 
     def __init__(self):
         # initialize a list of rooms.
         self.instance_map = [[]]
-        self.x_coordinate = 0
-        self.y_coordinate = 0
+        self.x_coordinate = 100
+        self.y_coordinate = 100
         self.instance_map[0].append(Room())
 
     def move_room(self, direction):
         # create the new coordinate
-        if direction == "East" or direction == "West":
+        if direction == "east" or direction == "west":
             self.x_coordinate = self.x_coordinate + Map.dict_directions[direction]
             self.add_room_x()
-        if direction == "North" or direction == "South":
+        if direction == "north" or direction == "south":
             self.y_coordinate = self.y_coordinate + Map.dict_directions[direction]
             self.add_room_y()
 
     def current_room(self):
-        return [self.x_coordinate, self.y_coordinate]
+        return self.instance_map[self.x_coordinate][self.y_coordinate]
 
     def add_room_x(self):
 
-        if isinstance(self.instance_map[self.x_coordinate][self.y_coordinate], Room):
-            return None
-
-        # need to figure out how to have a negative coordinate that doesn't count from the back of the list
-
-        self.instance_map[self.x_coordinate] = Room()
+        try:
+            if isinstance(self.instance_map[self.x_coordinate][self.y_coordinate], Room):
+                return None
+        except IndexError:
+            new_room = Room()
+            if not isinstance(self.instance_map[self.x_coordinate], list):
+                self.instance_map.append([])
+            self.instance_map[self.x_coordinate].append(new_room)
 
     def add_room_y(self):
 
-        if isinstance(self.instance_map[self.x_coordinate][self.y_coordinate], Room):
-            return None
-
-        self.instance_map[self.x_coordinate] = Room()
+        try:
+            if isinstance(self.instance_map[self.x_coordinate][self.y_coordinate], Room):
+                return None
+        except IndexError:
+            new_room = Room()
+            self.instance_map[self.x_coordinate].append(new_room)
 
 
 '''
@@ -111,28 +113,38 @@ track how far a user has walked or moved in the game.
 
 if __name__ == '__main__':
 
-    entered_commands = ["contents", "walls", "north", "south", "east", "west", "exit"]
+    entered_commands = ["contents", "walls", "north", "south", "east", "west", "steps", "exit"]
     # Creates both the map and the first room.
     player_map = Map()
     player = Player()
 
-    player_entry = input("Please enter a command (For list of commands, enter command): ").lower()
+    while True:
+        player_entry = input("Please enter a command (For list of commands, enter command): ").lower()
 
-    while player_entry not in entered_commands:
-        print("That is not a valid command.")
-        player_entry = input("Please enter a command (For list of commands, enter command): ")
+        while player_entry not in entered_commands:
+            print("That is not a valid command.")
+            player_entry = input("Please enter a command: ").lower()
 
-    # if the player exits, then the whole thing is over.
-    # if player_entry == "exit":
-        # break
+        # if the player exits, then the whole thing is over.
+        if player_entry == "exit":
+            break
 
-    if player_entry in entered_commands[2:5]:
-        player.move_person(player_map, player_entry)
+        if player_entry == entered_commands[0]:
+            pass
+        if player_entry == entered_commands[1]:
+            # display the content of all the walls
+            pass
+        if player_entry in entered_commands[2:5]:
+            # move the person in the direction they indicated.
+            player.move_person(player_map, player_entry)
+        if player_entry == entered_commands[6]:
+            # output the number of steps traveled
+            print("The number of steps taken is: ", player.num_steps())
+            pass
+        if player_entry == entered_commands[-1]:
+            break
 
     # Pass the direction of travel to the Person, who moves in that direction.
-
-    # create a room
-    # new_room = Room(coordinate_x, coordinate_y)
 
 # todo Room instances should have values for the walls for N, S, E, W.
 # todo The value for a wall should be either a blank wall or a passage.

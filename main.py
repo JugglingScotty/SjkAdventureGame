@@ -28,10 +28,12 @@ class Room:
     def whats_on_walls(self, wall):
         return self.dict_room_walls[wall]
 
-    def move_that_direction(self, direction):
+    def can_player_move_that_direction(self, direction):
         # Make sure that the direction chosen has an exit.
-
-        pass
+        if self.dict_room_walls[direction] is "Blank":
+            return False
+        else:
+            return True
 
 
 class Player:
@@ -47,6 +49,7 @@ class Player:
         return self.steps
 
     def move_person(self, p_map, direction):
+
         # Call Move that direction from the room.
         p_map.move_room(direction.lower())
         # Increment the number of steps upward.
@@ -60,13 +63,18 @@ class Map:
 
     def __init__(self):
         # initialize a list of rooms.
-        self.instance_map = [[]]
-        self.x_coordinate = 100
-        self.y_coordinate = 100
-        self.instance_map[0].append(Room())
+        self.instance_map = {{}}
+        self.x_coordinate = 0
+        self.y_coordinate = 0
+        self.add_room_y()
 
     def move_room(self, direction):
-        # create the new coordinate
+
+        if not self.current_room().can_player_move_that_direction(direction):
+            print("Player cannot move that direction.")
+            return None
+
+        # up the the counter to the new coordinate
         if direction == "east" or direction == "west":
             self.x_coordinate = self.x_coordinate + Map.dict_directions[direction]
             self.add_room_x()
@@ -84,30 +92,35 @@ class Map:
                 return None
         except IndexError:
             new_room = Room()
-            if not isinstance(self.instance_map[self.x_coordinate], list):
-                self.instance_map.append([])
+            if not isinstance(self.instance_map[self.x_coordinate], dict):
+                self.instance_map.append({})
+                self.add_room_y()
             self.instance_map[self.x_coordinate].append(new_room)
 
     def add_room_y(self):
 
+
+
+        # todo change from add_room_y to add_room
+
+        new_room = Room()
         try:
             if isinstance(self.instance_map[self.x_coordinate][self.y_coordinate], Room):
                 return None
         except IndexError:
-            new_room = Room()
             self.instance_map[self.x_coordinate].append(new_room)
 
 
 '''
 
-This is a basic version of the Adventure game. It is completely text-based.
+This is a basic version. of the Adventure game. It is completely text-based.
 In this version of the game, users can move about through different rooms within a single setting,
 and based on the user input, it will provide descriptions for each room. This is one of the
 interesting python projects.
 
 Movement direction is crucial here – you must create walls and set the directions in which the
 users can move through the rooms, set movement restrictions, and also include a tracker that can
-track how far a user has walked or moved in the game.
+track how far a user has walked or moved in the game
 
 '''
 

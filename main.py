@@ -30,7 +30,7 @@ class Room:
 
     def can_player_move_that_direction(self, direction):
         # Make sure that the direction chosen has an exit.
-        if self.dict_room_walls[direction] is "Blank":
+        if self.dict_room_walls[direction] == "Blank":
             return False
         else:
             return True
@@ -63,9 +63,9 @@ class Map:
 
     def __init__(self):
         # initialize a list of rooms.
-        self.instance_map = {{}}
         self.x_coordinate = 0
         self.y_coordinate = 0
+        self.instance_map = {self.x_coordinate: {}}
         self.add_room_y()
 
     def move_room(self, direction):
@@ -90,16 +90,11 @@ class Map:
         try:
             if isinstance(self.instance_map[self.x_coordinate][self.y_coordinate], Room):
                 return None
-        except IndexError:
-            new_room = Room()
-            if not isinstance(self.instance_map[self.x_coordinate], dict):
-                self.instance_map.append({})
-                self.add_room_y()
-            self.instance_map[self.x_coordinate].append(new_room)
+        except KeyError:
+            self.instance_map[self.x_coordinate] = {}
+            self.add_room_y()
 
     def add_room_y(self):
-
-
 
         # todo change from add_room_y to add_room
 
@@ -107,8 +102,8 @@ class Map:
         try:
             if isinstance(self.instance_map[self.x_coordinate][self.y_coordinate], Room):
                 return None
-        except IndexError:
-            self.instance_map[self.x_coordinate].append(new_room)
+        except KeyError:
+            self.instance_map[self.x_coordinate][self.y_coordinate] = new_room
 
 
 '''

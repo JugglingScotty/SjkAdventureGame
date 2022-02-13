@@ -32,7 +32,7 @@ class TestPlayer(unittest.TestCase):
 class TestMap(unittest.TestCase):
     def test_map_creation(self):
         test_map = main.Map()
-        self.assertIsInstance(test_map.instance_map[0], main.Room)
+        self.assertIsInstance(test_map.instance_map[0][0], main.Room)
 
 
 if __name__ == '__main__':

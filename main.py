@@ -18,7 +18,7 @@ class Room:
 
         # the wall's contents.
 
-        self.dict_room_walls = {"North": "Blank", "South": "Blank", "East": "Blank", "West": "Blank"}
+        self.dict_room_walls = {"north": "Door", "south": "Door", "east": "Door", "west": "Door"}
 
         # determining the values of the sides of the rooms.
 
@@ -51,7 +51,7 @@ class Player:
     def move_person(self, p_map, direction):
 
         # Call Move that direction from the room.
-        p_map.move_room(direction.lower())
+        p_map.move_room(direction)
         # Increment the number of steps upward.
         self.take_step()
 

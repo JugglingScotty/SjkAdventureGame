@@ -11,10 +11,7 @@ class Room:
         # todo create a file so the values of the contents dictionary can have many values.
         # todo call an OpenAI API so it can fill in the description of the room's contents.
 
-        self.contents = random.choice(list(Room.dict_contents))
-
-        if type(contents_str) is not None:
-            self.contents = contents_str
+        self.contents = random.choice(Room.dict_contents)
 
         # the wall's contents.
 
@@ -23,7 +20,7 @@ class Room:
         # determining the values of the sides of the rooms.
 
     def whats_in_room(self):
-        return self.contents
+        return ("The room contains: " + self.contents)
 
     def whats_on_walls(self, wall):
         return self.dict_room_walls[wall]
@@ -52,6 +49,10 @@ class Player:
 
         # Call Move that direction from the room.
         p_map.move_room(direction)
+        # Present the contents of the next room.
+        current_room = p_map.current_room()
+        contents = current_room.whats_in_room()
+        print(contents)
         # Increment the number of steps upward.
         self.take_step()
 

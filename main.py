@@ -125,6 +125,11 @@ if __name__ == '__main__':
     player_map = Map()
     player = Player()
 
+    print ("You find yourself in a room.")
+    current_room = player_map.current_room()
+    contents = current_room.whats_in_room()
+    print(contents)
+
     while True:
 
         player_entry = None
@@ -138,7 +143,10 @@ if __name__ == '__main__':
             break
 
         if player_entry == viable_commands[0]:
-            pass
+            current_room = player_map.current_room()
+            contents = current_room.whats_in_room()
+            print(contents)
+
         if player_entry == viable_commands[1]:
             # display the content of all the walls
             pass

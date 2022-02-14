@@ -66,7 +66,7 @@ class Map:
         self.x_coordinate = 0
         self.y_coordinate = 0
         self.instance_map = {self.x_coordinate: {}}
-        self.add_room_y()
+        self.add_room()
 
     def move_room(self, direction):
 
@@ -77,26 +77,24 @@ class Map:
         # up the the counter to the new coordinate
         if direction == "east" or direction == "west":
             self.x_coordinate = self.x_coordinate + Map.dict_directions[direction]
-            self.add_room_x()
+            self.add_x()
         if direction == "north" or direction == "south":
             self.y_coordinate = self.y_coordinate + Map.dict_directions[direction]
-            self.add_room_y()
+            self.add_room()
 
     def current_room(self):
         return self.instance_map[self.x_coordinate][self.y_coordinate]
 
-    def add_room_x(self):
+    def add_x(self):
 
         try:
-            if isinstance(self.instance_map[self.x_coordinate][self.y_coordinate], Room):
+            if isinstance(self.instance_map[self.x_coordinate], dict):
                 return None
         except KeyError:
             self.instance_map[self.x_coordinate] = {}
-            self.add_room_y()
+            self.add_room()
 
-    def add_room_y(self):
-
-        # todo change from add_room_y to add_room
+    def add_room(self):
 
         new_room = Room()
         try:
@@ -121,35 +119,36 @@ track how far a user has walked or moved in the game
 
 if __name__ == '__main__':
 
-    entered_commands = ["contents", "walls", "north", "south", "east", "west", "steps", "exit"]
+    viable_commands = ["contents", "walls", "north", "south", "east", "west", "steps", "exit"]
     # Creates both the map and the first room.
     player_map = Map()
     player = Player()
 
     while True:
-        player_entry = input("Please enter a command (For list of commands, enter command): ").lower()
 
-        while player_entry not in entered_commands:
-            print("That is not a valid command.")
+        player_entry = None
+        while player_entry not in viable_commands:
+            if player_entry is not None:
+                print("That is not a valid command.")
             player_entry = input("Please enter a command: ").lower()
 
         # if the player exits, then the whole thing is over.
         if player_entry == "exit":
             break
 
-        if player_entry == entered_commands[0]:
+        if player_entry == viable_commands[0]:
             pass
-        if player_entry == entered_commands[1]:
+        if player_entry == viable_commands[1]:
             # display the content of all the walls
             pass
-        if player_entry in entered_commands[2:5]:
+        if player_entry in viable_commands[2:6]:
             # move the person in the direction they indicated.
             player.move_person(player_map, player_entry)
-        if player_entry == entered_commands[6]:
+        if player_entry == viable_commands[6]:
             # output the number of steps traveled
             print("The number of steps taken is: ", player.num_steps())
             pass
-        if player_entry == entered_commands[-1]:
+        if player_entry == viable_commands[-1]:
             break
 
     # Pass the direction of travel to the Person, who moves in that direction.

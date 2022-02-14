@@ -122,7 +122,7 @@ track how far a user has walked or moved in the game
 
 if __name__ == '__main__':
 
-    viable_commands = ["contents", "walls", "north", "south", "east", "west", "steps", "exit"]
+    viable_commands = ["contents", "walls", "north", "south", "east", "west", "steps", "map", "exit"]
     # Creates both the map and the first room.
     player_map = Map()
     player = Player()
@@ -164,17 +164,17 @@ if __name__ == '__main__':
         if player_entry == viable_commands[6]:
             # output the number of steps traveled
             print("The number of steps taken is: ", player.num_steps())
+        if player_entry == viable_commands[7]:
+            # method for displaying the map
             pass
+
         if player_entry == viable_commands[-1]:
             break
 
     # Pass the direction of travel to the Person, who moves in that direction.
 
-# todo Room instances should have values for the walls for N, S, E, W.
-# todo The value for a wall should be either a blank wall or a passage.
-# todo the room should contain something of note.
-# todo The user should provide input for choosing a direction.
-# todo upon choosing a direction, the program should create a new room.
+# todo expand the list of values for what a room contains.
+# todo make having a door randomized.
+# todo detect whether an adjacent room has a door into the current room.
 # todo new room creation needs to have a passage that connects back to the previous.
 # todo an option for the player should be to display the map.
-# todo rooms should contain passages that connect to existing room.

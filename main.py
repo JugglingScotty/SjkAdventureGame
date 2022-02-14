@@ -6,24 +6,26 @@ class Room:
     # todo add items to the dictionary for room descriptions.
     dict_contents = {0: "A block made of ice", 1: "A skull with flaming eyes."}
 
-    def __init__(self, contents_str=None):
+    def __init__(self):
 
         # todo create a file so the values of the contents dictionary can have many values.
         # todo call an OpenAI API so it can fill in the description of the room's contents.
 
-        self.contents = random.choice(Room.dict_contents)
+        self.contents = Room.dict_contents[random.choice(Room.dict_contents)]
 
-        # the wall's contents.
-
-        self.dict_room_walls = {"north": "Door", "south": "Door", "east": "Door", "west": "Door"}
+        self.dict_room_walls = {"north": "a door", "south": "a door", "east": "a door", "west": "a door"}
 
         # determining the values of the sides of the rooms.
 
     def whats_in_room(self):
-        return ("The room contains: " + self.contents)
+        return "The room contains: " + self.contents
 
-    def whats_on_walls(self, wall):
-        return self.dict_room_walls[wall]
+    def whats_on_walls(self):
+        north_wall = ("The north wall contains " + self.dict_room_walls["north"])
+        south_wall = ("The south wall contains " + self.dict_room_walls["south"])
+        east_wall = ("The east wall contains " + self.dict_room_walls["east"])
+        west_wall = ("The west wall contains " + self.dict_room_walls["west"])
+        return north_wall, south_wall, east_wall, west_wall
 
     def can_player_move_that_direction(self, direction):
         # Make sure that the direction chosen has an exit.
@@ -50,9 +52,9 @@ class Player:
         # Call Move that direction from the room.
         p_map.move_room(direction)
         # Present the contents of the next room.
-        current_room = p_map.current_room()
-        contents = current_room.whats_in_room()
-        print(contents)
+        current_r = p_map.current_room()
+        room_contents = current_r.whats_in_room()
+        print(room_contents)
         # Increment the number of steps upward.
         self.take_step()
 
@@ -125,7 +127,7 @@ if __name__ == '__main__':
     player_map = Map()
     player = Player()
 
-    print ("You find yourself in a room.")
+    print("You find yourself in a room.")
     current_room = player_map.current_room()
     contents = current_room.whats_in_room()
     print(contents)
@@ -149,7 +151,13 @@ if __name__ == '__main__':
 
         if player_entry == viable_commands[1]:
             # display the content of all the walls
-            pass
+            current_room = player_map.current_room()
+            north, south, east, west = current_room.whats_on_walls()
+            print(north)
+            print(south)
+            print(east)
+            print(west)
+
         if player_entry in viable_commands[2:6]:
             # move the person in the direction they indicated.
             player.move_person(player_map, player_entry)

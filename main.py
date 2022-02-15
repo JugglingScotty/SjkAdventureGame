@@ -34,6 +34,10 @@ class Room:
         else:
             return True
 
+    def __str__(self):
+        pass
+        return "╬"
+
 
 class Player:
     # contains the number of steps moved so far.
@@ -106,6 +110,21 @@ class Map:
         except KeyError:
             self.instance_map[self.x_coordinate][self.y_coordinate] = new_room
 
+    def show_map(self):
+
+        map_for_printing = ""
+
+        x_max_len = len(self.instance_map)
+
+        # todo find the y max length
+
+        for x_coord in self.instance_map:
+            for y_coord in self.instance_map:
+                map_for_printing = map_for_printing + self.instance_map[x_coord][y_coord]
+            map_for_printing = map_for_printing + "/n"
+
+        return map_for_printing
+
 
 '''
 
@@ -166,8 +185,8 @@ if __name__ == '__main__':
             print("The number of steps taken is: ", player.num_steps())
         if player_entry == viable_commands[7]:
             # method for displaying the map
-            pass
-
+            print_map = player_map.show_map()
+            print(print_map)
         if player_entry == viable_commands[-1]:
             break
 

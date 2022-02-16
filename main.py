@@ -11,7 +11,7 @@ class Room:
         # todo create a file so the values of the contents dictionary can have many values.
         # todo call an OpenAI API so it can fill in the description of the room's contents.
 
-        self.contents = Room.dict_contents[random.choice(Room.dict_contents)]
+        self.contents = random.choice(Room.dict_contents)
 
         self.dict_room_walls = {"north": "a door", "south": "a door", "east": "a door", "west": "a door"}
 
@@ -34,8 +34,7 @@ class Room:
         else:
             return True
 
-    def __str__(self):
-        pass
+    def map_str(self):
         return "╬"
 
 
@@ -115,12 +114,19 @@ class Map:
         map_for_printing = ""
 
         x_max_len = len(self.instance_map)
+        y_max_len = 1
 
-        # todo find the y max length
+        for x_dict in self.instance_map:
+            if y_max_len > len(self.instance_map[x_dict]):
+                y_max_len = len(self.instance_map[x_dict])
+
+        # todo identify how to add blanks if there isn't a room at that coordinate.
+
+        # todo figure out why a for loop is returning an index instead of the room object.
 
         for x_coord in self.instance_map:
             for y_coord in self.instance_map:
-                map_for_printing = map_for_printing + self.instance_map[x_coord][y_coord]
+                map_for_printing = map_for_printing + self.instance_map[x_coord][y_coord].map_str()
             map_for_printing = map_for_printing + "/n"
 
         return map_for_printing

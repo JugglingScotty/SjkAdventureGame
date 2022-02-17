@@ -113,21 +113,41 @@ class Map:
 
         map_for_printing = ""
 
-        x_max_len = len(self.instance_map)
-        y_max_len = 1
+        x_lowest_value = 0
+        x_highest_value = 0
+        y_lowest_value = 0
+        y_highest_value = 0
 
-        for x_dict in self.instance_map:
-            if y_max_len > len(self.instance_map[x_dict]):
-                y_max_len = len(self.instance_map[x_dict])
+        for x_dict_key in self.instance_map.keys():
+            if x_lowest_value > x_dict_key:
+                x_lowest_value = x_dict_key
 
-        # todo identify how to add blanks if there isn't a room at that coordinate.
+        for x_dict_key in self.instance_map.keys():
+            if x_highest_value < x_dict_key:
+                x_highest_value = x_dict_key
 
-        # todo figure out why a for loop is returning an index instead of the room object.
+        for x_dict_values in self.instance_map.values():
+            for y_dict_values in self.instance_map[x_dict_values].keys():
+                if y_lowest_value > y_dict_values:
+                    y_lowest_value = y_dict_values
+                if y_highest_value < y_dict_values:
+                    y_highest_value = y_dict_values
 
-        for x_coord in self.instance_map:
-            for y_coord in self.instance_map:
-                map_for_printing = map_for_printing + self.instance_map[x_coord][y_coord].map_str()
-            map_for_printing = map_for_printing + "/n"
+        # todo create the map for printing
+
+
+        for x in range(x_lowest_value, x_highest_value+1)
+            for y in range(y_lowest_value, y_highest_value+1)
+                try:
+                # add the room to the return image
+
+            # add a new line to the string
+
+        try:
+            self.instance_map[]
+
+
+
 
         return map_for_printing
 

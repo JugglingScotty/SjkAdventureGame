@@ -11,7 +11,8 @@ class Room:
         # todo create a file so the values of the contents dictionary can have many values.
         # todo call an OpenAI API so it can fill in the description of the room's contents.
 
-        self.contents = random.choice(Room.dict_contents)
+        all_contents = list(Room.dict_contents.values())
+        self.contents = random.choice(all_contents)
 
         self.dict_room_walls = {"north": "a door", "south": "a door", "east": "a door", "west": "a door"}
 
@@ -76,6 +77,8 @@ class Map:
 
     def move_room(self, direction):
 
+        # todo figure out why north on the map adds boxes to the right.  
+
         if not self.current_room().can_player_move_that_direction(direction):
             print("Player cannot move that direction.")
             return None
@@ -126,29 +129,23 @@ class Map:
             if x_highest_value < x_dict_key:
                 x_highest_value = x_dict_key
 
-        for x_dict_values in self.instance_map.values():
+        for x_dict_values in self.instance_map.keys():
             for y_dict_values in self.instance_map[x_dict_values].keys():
                 if y_lowest_value > y_dict_values:
                     y_lowest_value = y_dict_values
                 if y_highest_value < y_dict_values:
                     y_highest_value = y_dict_values
 
-        # todo create the map for printing
-
-
-        for x in range(x_lowest_value, x_highest_value+1)
-            for y in range(y_lowest_value, y_highest_value+1)
+        for x in range(x_lowest_value, x_highest_value+1):
+            for y in range(y_lowest_value, y_highest_value+1):
                 try:
-                # add the room to the return image
+                    map_for_printing = map_for_printing + self.instance_map[x][y].map_str()
+                except KeyError:
+                    map_for_printing = map_for_printing + " "
 
-            # add a new line to the string
+            map_for_printing = map_for_printing + "\n"
 
-        try:
-            self.instance_map[]
-
-
-
-
+        # todo need to improve the formatting on the map
         return map_for_printing
 
 
@@ -216,10 +213,7 @@ if __name__ == '__main__':
         if player_entry == viable_commands[-1]:
             break
 
-    # Pass the direction of travel to the Person, who moves in that direction.
-
 # todo expand the list of values for what a room contains.
 # todo make having a door randomized.
 # todo detect whether an adjacent room has a door into the current room.
 # todo new room creation needs to have a passage that connects back to the previous.
-# todo an option for the player should be to display the map.

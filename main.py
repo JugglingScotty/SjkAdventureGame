@@ -1,10 +1,37 @@
 import random
+import csv
+import shutil
 
 
 class Room:
     # a class that represents one room in the dungeon.
     # todo add items to the dictionary for room descriptions.
-    dict_contents = {0: "A block made of ice", 1: "A skull with flaming eyes."}
+
+    dict_contents = {}
+
+    # make a copy of the existing file.
+    original = "contents.csv"
+    target = "contents_copy.cvs"
+
+    shutil.copyfile(original, target)
+
+    # todo adjust to the new target
+    with open(target, mode='r') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                print(f'Column names are {", ".join(row)}')
+                line_count += 1
+            print(
+                f'\t{row["name"]} works in the {row["department"]} department, and was born in {row["birthday month"]}.')
+            line_count += 1
+        print(f'Processed {line_count} lines.')
+
+    # close the file
+
+
+    dict_contents = {}
 
     def __init__(self):
 
@@ -77,7 +104,7 @@ class Map:
 
     def move_room(self, direction):
 
-        # todo figure out why north on the map adds boxes to the right.  
+        # todo figure out why north on the map adds boxes to the right.
 
         if not self.current_room().can_player_move_that_direction(direction):
             print("Player cannot move that direction.")

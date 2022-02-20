@@ -71,12 +71,10 @@ class Player:
         # Call Move that direction from the room.
         p_map.move_room(direction)
         # Present the contents of the next room.
-        current_r = p_map.current_room()
-        room_contents = current_r.whats_in_room()
+        # current_r = p_map.current_room()
+        room_contents = p_map.current_room().whats_in_room()
         print(room_contents)
-        # Increment the number of steps upward.
         self.take_step()
-
 
 class Map:
     # representing a collection of rooms.
@@ -139,8 +137,6 @@ class Map:
         for x_dict_key in self.instance_map.keys():
             if x_lowest_value > x_dict_key:
                 x_lowest_value = x_dict_key
-
-        for x_dict_key in self.instance_map.keys():
             if x_highest_value < x_dict_key:
                 x_highest_value = x_dict_key
 
@@ -151,8 +147,8 @@ class Map:
                 if y_highest_value < y_dict_values:
                     y_highest_value = y_dict_values
 
-        for x in range(x_lowest_value, x_highest_value+1):
-            for y in range(y_lowest_value, y_highest_value+1):
+        for x in range(y_lowest_value, y_highest_value + 1):
+            for y in range(x_lowest_value, x_highest_value+1):
                 try:
                     map_for_printing = map_for_printing + self.instance_map[x][y].map_str()
                 except KeyError:
@@ -230,6 +226,6 @@ if __name__ == '__main__':
         if player_entry == viable_commands[-1]:
             break
 
-# todo make having a door randomized.
-# todo detect whether an adjacent room has a door into the current room.
-# todo new room creation needs to have a passage that connects back to the previous.
+# improvement option - make having a door randomized.
+# improvement option - detect whether an adjacent room has a door into the current room.
+# improvement option - new room creation needs to have a passage that connects back to the previous.

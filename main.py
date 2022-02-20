@@ -5,38 +5,9 @@ import shutil
 
 class Room:
     # a class that represents one room in the dungeon.
-    # todo add items to the dictionary for room descriptions.
-
-    dict_contents = {}
-
-    # make a copy of the existing file.
-    original = "contents.csv"
-    target = "contents_copy.cvs"
-
-    shutil.copyfile(original, target)
-
-    # todo adjust to the new target
-    with open(target, mode='r') as csv_file:
-        csv_reader = csv.DictReader(csv_file)
-        line_count = 0
-        for row in csv_reader:
-            if line_count == 0:
-                print(f'Column names are {", ".join(row)}')
-                line_count += 1
-            print(
-                f'\t{row["name"]} works in the {row["department"]} department, and was born in {row["birthday month"]}.')
-            line_count += 1
-        print(f'Processed {line_count} lines.')
-
-    # close the file
-
-
     dict_contents = {}
 
     def __init__(self):
-
-        # todo create a file so the values of the contents dictionary can have many values.
-        # todo call an OpenAI API so it can fill in the description of the room's contents.
 
         all_contents = list(Room.dict_contents.values())
         self.contents = random.choice(all_contents)
@@ -44,6 +15,23 @@ class Room:
         self.dict_room_walls = {"north": "a door", "south": "a door", "east": "a door", "west": "a door"}
 
         # determining the values of the sides of the rooms.
+
+    @classmethod
+    def set_room_dict(cls):
+        # make a copy of the existing file.
+        original = "contents.csv"
+
+        with open(original, mode='r') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            line_count = 0
+            for row in csv_reader:
+                if line_count == 0:
+                    print(f'Column names are {", ".join(row)}')
+                    line_count += 1
+                this_room_key = row["room_key"]
+                this_descr = row["descr"]
+                line_count += 1
+                cls.dict_contents[this_room_key] = this_descr
 
     def whats_in_room(self):
         return "The room contains: " + self.contents
@@ -191,6 +179,8 @@ track how far a user has walked or moved in the game
 
 if __name__ == '__main__':
 
+    Room.set_room_dict()
+
     viable_commands = ["contents", "walls", "north", "south", "east", "west", "steps", "map", "exit"]
     # Creates both the map and the first room.
     player_map = Map()
@@ -240,7 +230,6 @@ if __name__ == '__main__':
         if player_entry == viable_commands[-1]:
             break
 
-# todo expand the list of values for what a room contains.
 # todo make having a door randomized.
 # todo detect whether an adjacent room has a door into the current room.
 # todo new room creation needs to have a passage that connects back to the previous.

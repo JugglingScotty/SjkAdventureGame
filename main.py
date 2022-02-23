@@ -1,6 +1,5 @@
 import random
 import csv
-import shutil
 
 
 class Room:
@@ -29,9 +28,9 @@ class Room:
                     print(f'Column names are {", ".join(row)}')
                     line_count += 1
                 this_room_key = row["room_key"]
-                this_descr = row["descr"]
+                this_description = row["descr"]
                 line_count += 1
-                cls.dict_contents[this_room_key] = this_descr
+                cls.dict_contents[this_room_key] = this_description
 
     def whats_in_room(self):
         return "The room contains: " + self.contents
@@ -51,7 +50,7 @@ class Room:
             return True
 
     def map_str(self):
-        return "╬"
+        return "☐"
 
 
 class Player:
@@ -75,6 +74,7 @@ class Player:
         room_contents = p_map.current_room().whats_in_room()
         print(room_contents)
         self.take_step()
+
 
 class Map:
     # representing a collection of rooms.
@@ -105,7 +105,10 @@ class Map:
             self.add_room()
 
     def current_room(self):
-        return self.instance_map[self.x_coordinate][self.y_coordinate]
+        try:
+            return self.instance_map[self.x_coordinate][self.y_coordinate]
+        except KeyError:
+            pass
 
     def add_x(self):
 
@@ -127,8 +130,6 @@ class Map:
 
     def show_map(self):
 
-        map_for_printing = ""
-
         x_lowest_value = 0
         x_highest_value = 0
         y_lowest_value = 0
@@ -140,23 +141,39 @@ class Map:
             if x_highest_value < x_dict_key:
                 x_highest_value = x_dict_key
 
-        for x_dict_values in self.instance_map.keys():
-            for y_dict_values in self.instance_map[x_dict_values].keys():
-                if y_lowest_value > y_dict_values:
-                    y_lowest_value = y_dict_values
-                if y_highest_value < y_dict_values:
-                    y_highest_value = y_dict_values
+            for y_dict_key in self.instance_map[x_dict_key].keys():
+                if y_lowest_value > y_dict_key:
+                    y_lowest_value = y_dict_key
+                if y_highest_value < y_dict_key:
+                    y_highest_value = y_dict_key
 
-        for x in range(y_lowest_value, y_highest_value + 1):
-            for y in range(x_lowest_value, x_highest_value+1):
+        x_list = []
+        y_list = []
+
+        # todo determine why this is printing multiple times.
+        for y in range(y_lowest_value, y_highest_value + 1):
+
+            for x in range(x_lowest_value, x_highest_value+1):
+
                 try:
-                    map_for_printing = map_for_printing + self.instance_map[x][y].map_str()
+                    if isinstance(self.instance_map[x][y], Room):
+                        y_list.append(self.instance_map[x][y].map_str())
                 except KeyError:
-                    map_for_printing = map_for_printing + " "
+                    y_list.append(" ")
 
-            map_for_printing = map_for_printing + "\n"
+            y_string = "".join(y_list)
+            x_list.append(y_string)
 
-        # todo need to improve the formatting on the map
+        map_for_printing = '\n'.join(x_list)
+
+        #         try:
+        #             map_for_printing = map_for_printing + self.instance_map[x][y].map_str()
+        #         except KeyError:
+        #             map_for_printing = map_for_printing + " "
+        #
+        #     map_for_printing = map_for_printing + "\n"
+        #
+        # # todo need to improve the formatting on the map
         return map_for_printing
 
 
